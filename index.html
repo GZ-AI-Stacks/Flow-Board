@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLOW Board — Digitales Whiteboard · Einmalkauf 39 €</title>
+<meta name="description" content="Digitales Whiteboard für Unterricht und Präsentation. Offline, DSGVO-konform, kein Abo. Einmal kaufen, jederzeit nutzen.">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ══════════════════════════════════════════════════════════
+   THEME TOKENS
+   ══════════════════════════════════════════════════════════ */
+
+/* WARM LIGHT — hell, warm */
+:root,
+[data-theme="light"] {
+  --bg:        #f8f5f0;
+  --bg-alt:    #f0ece5;
+  --bg-card:   #ffffff;
+  --text:      #1c1917;
+  --text-soft: #6b6560;
+  --text-muted:#a8a29e;
+  --border:    #e2dcd5;
+  --border-s:  #d4cdc5;
+  --accent:    #c2410c;
+  --accent-h:  #9a3412;
+  --accent-soft:#fff7ed;
+  --accent-rgb:194,65,12;
+  --ink:       #1c1917;
+  --nav-bg:    rgba(248,245,240,0.92);
+  --shadow-sm: 0 1px 3px rgba(28,25,23,.06), 0 4px 12px rgba(28,25,23,.04);
+  --shadow-md: 0 2px 8px rgba(28,25,23,.07), 0 16px 40px rgba(28,25,23,.07);
+}
+
+/* ORANGE DARK — Standard, warm & stark */
+[data-theme="dark"] {
+  --bg:        #18140f;
+  --bg-alt:    #211c15;
+  --bg-card:   #251e16;
+  --text:      #f5f0e8;
+  --text-soft: #a89880;
+  --text-muted:#6b5e4e;
+  --border:    #352c20;
+  --border-s:  #453a2a;
+  --accent:    #ea580c;
+  --accent-h:  #c2410c;
+  --accent-soft:#2c1a0e;
+  --accent-rgb:234,88,12;
+  --ink:       #f5f0e8;
+  --nav-bg:    rgba(24,20,15,0.94);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.25);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.4), 0 16px 40px rgba(0,0,0,.3);
+}
+
+/* SLATE BLUE — kühl, professionell */
+[data-theme="slate"] {
+  --bg:        #0f1117;
+  --bg-alt:    #161b27;
+  --bg-card:   #1a2035;
+  --text:      #e8edf5;
+  --text-soft: #8896b0;
+  --text-muted:#4d5c78;
+  --border:    #242e45;
+  --border-s:  #2e3b58;
+  --accent:    #4f8ef7;
+  --accent-h:  #2563eb;
+  --accent-soft:#0e1e40;
+  --accent-rgb:79,142,247;
+  --ink:       #e8edf5;
+  --nav-bg:    rgba(15,17,23,0.94);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.5), 0 4px 12px rgba(0,0,0,.3);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.5), 0 16px 40px rgba(0,0,0,.35);
+}
+
+/* MIDNIGHT PURPLE — edel, kreativ */
+[data-theme="purple"] {
+  --bg:        #0e0b16;
+  --bg-alt:    #150f22;
+  --bg-card:   #1c1530;
+  --text:      #ede8f8;
+  --text-soft: #9080b8;
+  --text-muted:#504070;
+  --border:    #2a2045;
+  --border-s:  #382b5a;
+  --accent:    #a855f7;
+  --accent-h:  #7c3aed;
+  --accent-soft:#1a0e30;
+  --accent-rgb:168,85,247;
+  --ink:       #ede8f8;
+  --nav-bg:    rgba(14,11,22,0.94);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.5), 0 4px 12px rgba(0,0,0,.3);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.5), 0 16px 40px rgba(0,0,0,.35);
+}
+
+/* VIP GOLD — dunkelbraun-mahagoni, champagne-gold */
+[data-theme="gold"] {
+  --bg:        #0e0a06;
+  --bg-alt:    #160f08;
+  --bg-card:   #1c140b;
+  --text:      #f5ead8;
+  --text-soft: #9c8060;
+  --text-muted:#5a4030;
+  --border:    #2e200e;
+  --border-s:  #3d2a14;
+  --accent:    #d4a017;
+  --accent-h:  #b8860b;
+  --accent-soft:#1e1504;
+  --accent-rgb:212,160,23;
+  --ink:       #f5ead8;
+  --nav-bg:    rgba(14,10,6,0.94);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.5), 0 4px 12px rgba(0,0,0,.3);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.5), 0 16px 40px rgba(0,0,0,.35);
+}
+
+/* ══════════════════════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════════════════════ */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.65;
+  transition: background .3s, color .3s;
+}
+
+/* ══════════════════════════════════════════════════════════
+   NAV
+   ══════════════════════════════════════════════════════════ */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: -.4px;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+}
+
+.nav-icon {
+  width: 22px; height: 22px;
+  background: var(--accent);
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background .3s;
+}
+.nav-icon::after {
+  content: '';
+  display: block;
+  width: 10px; height: 7px;
+  border: 1.5px solid rgba(255,255,255,.9);
+  border-radius: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-soft);
+  text-decoration: none;
+  font-size: .88rem;
+  font-weight: 500;
+  transition: color .15s;
+}
+.nav-links a:hover { color: var(--text); }
+
+.nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+
+.nav-cta {
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 17px;
+  border-radius: 7px;
+  font-size: .85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .2s;
+  white-space: nowrap;
+  letter-spacing: -.1px;
+}
+.nav-cta:hover { background: var(--accent-h); }
+
+@media (max-width: 700px) { .nav-links { display: none; } }
+
+/* ══════════════════════════════════════════════════════════
+   THEME SWITCHER (Nav-integriert)
+   ══════════════════════════════════════════════════════════ */
+.ts-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+}
+
+.ts-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .15s, border-color .15s, box-shadow .15s;
+  position: relative;
+  flex-shrink: 0;
+}
+.ts-dot:hover { transform: scale(1.25); }
+.ts-dot[data-t="light"]  { background: linear-gradient(135deg, #e8dfd0, #c2410c); }
+.ts-dot[data-t="dark"]   { background: linear-gradient(135deg, #251e16, #ea580c); }
+.ts-dot[data-t="slate"]  { background: linear-gradient(135deg, #1a2035, #4f8ef7); }
+.ts-dot[data-t="purple"] { background: linear-gradient(135deg, #1c1530, #a855f7); }
+.ts-dot[data-t="gold"]   { background: linear-gradient(135deg, #1c140b, #d4a017); }
+
+.ts-dot.active {
+  border-color: var(--text);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
+/* Tooltip */
+.ts-dot::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  color: var(--text-soft);
+  font-size: .72rem;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s;
+  box-shadow: var(--shadow-sm);
+}
+.ts-dot:hover::after { opacity: 1; }
+
+/* ══════════════════════════════════════════════════════════
+   HERO
+   ══════════════════════════════════════════════════════════ */
+.hero {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 88px 2rem 72px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 880px) {
+  .hero { grid-template-columns: 1fr; padding: 52px 1.5rem 44px; gap: 44px; }
+  .hero-visual { order: -1; }
+}
+
+.eyebrow {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  transition: color .3s;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: .78rem;
+  font-weight: 600;
+  padding: 5px 13px;
+  border-radius: 99px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(var(--accent-rgb),.2);
+  transition: background .3s, color .3s;
+}
+
+.hero h1 {
+  font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.13;
+  letter-spacing: -.6px;
+  color: var(--ink);
+  margin-bottom: 20px;
+  transition: color .3s;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+  transition: color .3s;
+}
+
+.hero-lead {
+  font-size: 1.05rem;
+  color: var(--text-soft);
+  line-height: 1.72;
+  margin-bottom: 28px;
+  max-width: 430px;
+}
+
+.hero-facts {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+.fact {
+  flex: 1 1 auto;
+  padding: 10px 16px;
+  font-size: .8rem;
+  color: var(--text-soft);
+  font-weight: 500;
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.fact:last-child { border-right: none; }
+.fact-mark { color: var(--accent); font-weight: 800; font-size: .85rem; transition: color .3s; }
+
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 13px 24px;
+  border-radius: 8px;
+  font-size: .97rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .2s, transform .1s;
+  letter-spacing: -.2px;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--accent-h); transform: translateY(-1px); }
+
+.btn-ghost {
+  color: var(--text-soft);
+  font-size: .93rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--border-s);
+  transition: color .15s, border-color .15s;
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+/* ══════════════════════════════════════════════════════════
+   WHITEBOARD MOCKUP
+   ══════════════════════════════════════════════════════════ */
+.hero-visual { position: relative; }
+
+.wb-frame {
+  background: var(--bg-card);
+  border: 1px solid var(--border-s);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: background .3s, border-color .3s;
+}
+
+.wb-bar {
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  padding: 9px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background .3s;
+}
+
+.wb-dot { width: 10px; height: 10px; border-radius: 50%; }
+.wb-dot.r { background: #ff5f57; }
+.wb-dot.y { background: #febc2e; }
+.wb-dot.g { background: #28c840; }
+
+.wb-tools { margin-left: 12px; display: flex; gap: 3px; }
+.wb-t {
+  width: 26px; height: 26px;
+  border-radius: 5px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8rem;
+  color: var(--text-soft);
+  transition: background .3s;
+}
+.wb-t.on { background: var(--accent); border-color: var(--accent-h); color: #fff; }
+
+.wb-page-tabs { margin-left: auto; display: flex; gap: 2px; }
+.wb-tab {
+  padding: 3px 10px;
+  font-size: .7rem;
+  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.wb-tab.on {
+  background: var(--accent-soft);
+  border-color: rgba(var(--accent-rgb),.25);
+  color: var(--accent);
+}
+
+.wb-canvas {
+  position: relative;
+  height: 290px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(120,100,80,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120,100,80,.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-color: var(--bg-card);
+  transition: background-color .3s;
+}
+
+.wb-layers {
+  position: absolute;
+  right: 10px; top: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 8px 10px;
+  width: 96px;
+  box-shadow: var(--shadow-sm);
+  transition: background .3s;
+}
+.wb-layer-head {
+  font-size: .63rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.wb-layer-row {
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: .68rem;
+  color: var(--text-soft);
+  display: flex; align-items: center; gap: 5px;
+  cursor: default;
+}
+.wb-layer-row.on {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  border: 1px solid rgba(var(--accent-rgb),.15);
+}
+
+.wb-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* ══════════════════════════════════════════════════════════
+   SCREENSHOT
+   ══════════════════════════════════════════════════════════ */
+.screenshot-strip {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background .3s;
+}
+.screenshot-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 2rem;
+  text-align: center;
+}
+.screenshot-inner img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--border-s);
+  box-shadow: var(--shadow-md);
+}
+.screenshot-caption {
+  margin-top: 18px;
+  font-size: .85rem;
+  color: var(--text-muted);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION BASE
+   ══════════════════════════════════════════════════════════ */
+.section-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 2rem;
+}
+
+.section-title {
+  font-size: clamp(1.65rem, 3vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -.5px;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 14px;
+  transition: color .3s;
+}
+
+hr.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════════════════════════════════
+   FEATURES
+   ══════════════════════════════════════════════════════════ */
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  margin-top: 48px;
+}
+@media (max-width: 820px) { .feat-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 500px) { .feat-grid { grid-template-columns: 1fr; } }
+
+.feat-cell {
+  padding: 30px 28px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: background .2s;
+}
+.feat-cell:hover { background: var(--bg-alt); }
+.feat-cell:nth-child(3n)         { border-right: none; }
+.feat-cell:nth-last-child(-n+3)  { border-bottom: none; }
+@media (max-width: 820px) {
+  .feat-cell:nth-child(3n)        { border-right: 1px solid var(--border); }
+  .feat-cell:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+  .feat-cell:nth-child(2n)        { border-right: none; }
+  .feat-cell:nth-last-child(-n+2) { border-bottom: none; }
+}
+
+.feat-num {
+  font-size: .68rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  transition: color .3s;
+}
+.feat-cell h3 {
+  font-size: .96rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -.2px;
+  transition: color .3s;
+}
+.feat-cell p { font-size: .85rem; color: var(--text-soft); line-height: 1.58; }
+
+/* ══════════════════════════════════════════════════════════
+   DEMO STRIP
+   ══════════════════════════════════════════════════════════ */
+.demo-strip {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background .3s;
+}
+.demo-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 820px) { .demo-inner { grid-template-columns: 1fr; gap: 36px; } }
+
+.demo-text p {
+  font-size: .97rem;
+  color: var(--text-soft);
+  line-height: 1.72;
+  margin: 16px 0 28px;
+  max-width: 420px;
+}
+
+.check-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.check-list li { display: flex; align-items: flex-start; gap: 10px; font-size: .9rem; color: var(--text-soft); }
+.check-mark {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: .7rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+  border: 1px solid rgba(var(--accent-rgb),.2);
+  transition: background .3s, color .3s;
+}
+
+.demo-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px 28px;
+  box-shadow: var(--shadow-sm);
+  transition: background .3s;
+}
+.demo-box-label {
+  font-size: .7rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px;
+}
+.demo-extras { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.demo-extras li {
+  padding: 11px 14px;
+  border-radius: 8px;
+  background: var(--bg-alt);
+  font-size: .88rem;
+  color: var(--text-soft);
+  display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--border);
+  transition: background .3s;
+}
+.de-mark { color: var(--accent); font-weight: 800; flex-shrink: 0; transition: color .3s; }
+
+/* ══════════════════════════════════════════════════════════
+   PREIS
+   ══════════════════════════════════════════════════════════ */
+.preis-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 820px) { .preis-wrap { grid-template-columns: 1fr; gap: 44px; } }
+
+.preis-left .section-title { margin-bottom: 14px; }
+.preis-left > p { font-size: .97rem; color: var(--text-soft); line-height: 1.7; margin-bottom: 28px; }
+
+.vgl {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: .85rem;
+  box-shadow: var(--shadow-sm);
+}
+.vgl-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 90px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+.vgl-row:last-child { border-bottom: none; }
+.vgl-row.head {
+  background: var(--bg-alt);
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted);
+}
+.vgl-row.head > span,
+.vgl-row > span:first-child { padding: 10px 16px; }
+.vgl-col { padding: 10px 8px; text-align: center; font-weight: 600; }
+.vgl-col.our {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-left: 1px solid rgba(var(--accent-rgb),.15);
+  transition: color .3s, background .3s;
+}
+.vgl-col.head-our {
+  color: var(--accent);
+  font-weight: 800;
+  background: var(--accent-soft);
+  border-left: 1px solid rgba(var(--accent-rgb),.15);
+  letter-spacing: .3px;
+  transition: color .3s, background .3s;
+}
+.vgl-no  { color: #9a3412; font-size: .85rem; }
+[data-theme="slate"]  .vgl-no { color: #93c5fd; opacity: .6; }
+[data-theme="purple"] .vgl-no { color: #d8b4fe; opacity: .6; }
+[data-theme="gold"]   .vgl-no { color: #fbbf24; opacity: .5; }
+[data-theme="light"]  .vgl-no { color: #9a3412; }
+.vgl-yes { color: #22c55e; font-size: .95rem; font-weight: 700; }
+
+.preis-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-s);
+  border-radius: 16px;
+  padding: 38px 34px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  transition: background .3s, border-color .3s;
+}
+.preis-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(var(--accent-rgb),.4));
+  transition: background .3s;
+}
+
+.preis-pill {
+  display: inline-block;
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(var(--accent-rgb),.2);
+  transition: color .3s, background .3s;
+}
+
+.preis-betrag { display: flex; align-items: flex-start; gap: 2px; margin-bottom: 4px; }
+.preis-sym {
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--ink); margin-top: .4rem; line-height: 1;
+  transition: color .3s;
+}
+.preis-num {
+  font-size: 4.2rem; font-weight: 900;
+  color: var(--ink); letter-spacing: -2px; line-height: 1;
+  transition: color .3s;
+}
+.preis-meta { font-size: .83rem; color: var(--text-muted); margin-bottom: 26px; }
+
+.inkl-divider {
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 22px 0 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.inkl-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.inkl-list { list-style: none; margin-bottom: 26px; }
+.inkl-list li {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .9rem; color: var(--text);
+  display: flex; align-items: center; gap: 11px;
+}
+.inkl-list li:last-child { border-bottom: none; }
+.inkl-icon {
+  width: 19px; height: 19px; border-radius: 50%;
+  background: var(--accent-soft);
+  border: 1px solid rgba(var(--accent-rgb),.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--accent);
+  font-size: .68rem; font-weight: 800;
+  transition: background .3s, color .3s;
+}
+
+.btn-kauf {
+  display: block; width: 100%;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 9px; padding: 15px;
+  font-size: 1rem; font-weight: 700;
+  cursor: pointer; text-decoration: none; text-align: center;
+  letter-spacing: -.2px;
+  transition: background .2s, transform .1s;
+}
+.btn-kauf:hover { background: var(--accent-h); transform: translateY(-1px); }
+
+.kauf-info { margin-top: 14px; font-size: .77rem; color: var(--text-muted); text-align: center; line-height: 1.55; }
+
+/* ══════════════════════════════════════════════════════════
+   FAQ
+   ══════════════════════════════════════════════════════════ */
+.faq-strip {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  transition: background .3s;
+}
+.faq-inner { max-width: 700px; margin: 0 auto; padding: 80px 2rem; }
+
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item summary {
+  padding: 19px 0;
+  cursor: pointer;
+  font-size: .97rem; font-weight: 600; color: var(--ink);
+  list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  -webkit-user-select: none; user-select: none;
+  transition: color .15s;
+}
+.faq-item summary:hover { color: var(--accent); }
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-tog {
+  width: 24px; height: 24px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: .9rem; color: var(--text-muted); font-weight: 300;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.faq-item[open] .faq-tog { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.faq-body { padding: 0 28px 20px 0; font-size: .9rem; color: var(--text-soft); line-height: 1.72; }
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 36px 2rem;
+  background: var(--bg-card);
+  transition: background .3s;
+}
+.footer-inner {
+  max-width: 1120px; margin: 0 auto;
+  display: flex; flex-wrap: wrap; gap: 20px;
+  justify-content: space-between; align-items: center;
+}
+.footer-left { font-size: .8rem; color: var(--text-muted); line-height: 1.8; }
+.footer-left strong { color: var(--text-soft); font-weight: 600; }
+.footer-left a { color: inherit; text-decoration: none; }
+.footer-left a:hover { color: var(--text); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: .82rem; color: var(--text-muted); text-decoration: none; transition: color .15s; }
+.footer-links a:hover { color: var(--accent); }
+
+/* Utilities */
+.pb-0  { padding-bottom: 0; }
+.pt-0  { padding-top: 0; }
+.d-ib  { display: inline-block; }
+.mt-5  { margin-top: 5px; }
+.mb-32 { margin-bottom: 32px; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────────── -->
+<nav aria-label="Hauptnavigation">
+  <a href="#" class="nav-brand">
+    <span class="nav-icon" aria-hidden="true"></span>
+    FLOW Board
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#demo">Demo</a></li>
+    <li><a href="#kaufen">Kaufen</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="ts-wrap" id="tswrap" role="group" aria-label="Farbthema wählen">
+      <button class="ts-dot" data-t="light"  data-label="Warm Light"      aria-label="Theme: Warm Light"></button>
+      <button class="ts-dot" data-t="dark"   data-label="Orange Dark"     aria-label="Theme: Orange Dark"></button>
+      <button class="ts-dot" data-t="slate"  data-label="Slate Blue"      aria-label="Theme: Slate Blue"></button>
+      <button class="ts-dot" data-t="purple" data-label="Midnight Purple" aria-label="Theme: Midnight Purple"></button>
+      <button class="ts-dot" data-t="gold"   data-label="VIP Gold"        aria-label="Theme: VIP Gold"></button>
+    </div>
+    <a href="#kaufen" class="nav-cta">Vollversion — 39 €</a>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────────── -->
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="hero-text">
+    <span class="hero-tag">✦ Digitales Whiteboard · Einmalkauf</span>
+    <h1 id="hero-h1">Zeichnen,<br>präsentieren,<br><em>aufnehmen.</em></h1>
+    <p class="hero-lead">Kein Abo, keine Cloud, kein Konto. Datei öffnen — und loslegen. Alles bleibt auf deinem Gerät.</p>
+
+    <div class="hero-facts" role="list" aria-label="Produktmerkmale">
+      <span class="fact" role="listitem"><span class="fact-mark">✓</span> 100 % Offline</span>
+      <span class="fact" role="listitem"><span class="fact-mark">✓</span> Keine Installation</span>
+      <span class="fact" role="listitem"><span class="fact-mark">✓</span> DSGVO by Design</span>
+      <span class="fact" role="listitem"><span class="fact-mark">✓</span> 14 Werkzeuge</span>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#kaufen" class="btn-primary">Vollversion kaufen — 39 €</a>
+      <a href="demo.html" class="btn-ghost">Demo ausprobieren →</a>
+    </div>
+  </div>
+
+  <!-- CSS Whiteboard-Mockup -->
+  <div class="hero-visual" aria-hidden="true">
+    <div class="wb-frame">
+      <div class="wb-bar">
+        <span class="wb-dot r"></span>
+        <span class="wb-dot y"></span>
+        <span class="wb-dot g"></span>
+        <div class="wb-tools">
+          <div class="wb-t on">✏</div>
+          <div class="wb-t">⌨</div>
+          <div class="wb-t">T</div>
+          <div class="wb-t">□</div>
+          <div class="wb-t">◻</div>
+        </div>
+        <div class="wb-page-tabs">
+          <div class="wb-tab on">S 1</div>
+          <div class="wb-tab">S 2</div>
+          <div class="wb-tab">S 3</div>
+        </div>
+      </div>
+      <div class="wb-canvas">
+        <svg class="wb-svg" viewBox="0 0 500 290" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="28" width="130" height="76" rx="5"
+                fill="rgba(194,65,12,.05)" stroke="#c2410c" stroke-width="1.8"/>
+          <text x="93" y="65" text-anchor="middle" fill="#c2410c"
+                font-size="12" font-weight="700" font-family="system-ui,sans-serif">Idee A</text>
+          <text x="93" y="82" text-anchor="middle" fill="#c2410c"
+                font-size="9" font-family="system-ui,sans-serif" opacity=".7">Offline · Privat</text>
+          <rect x="50" y="152" width="110" height="62" rx="5"
+                fill="rgba(180,83,9,.04)" stroke="#b45309" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="105" y="183" text-anchor="middle" fill="#b45309"
+                font-size="11" font-weight="700" font-family="system-ui,sans-serif">Konzept</text>
+          <line x1="93" y1="104" x2="105" y2="150"
+                stroke="#aaa" stroke-width="1.4" stroke-dasharray="4,3"/>
+          <polygon points="105,150 100,140 110,141" fill="#aaa"/>
+          <path d="M210,45 Q245,28 272,48 Q298,66 322,42 Q345,22 370,38 Q392,50 410,38"
+                stroke="#c2410c" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".7"/>
+          <rect x="200" y="90" width="150" height="80" rx="6"
+                fill="rgba(254,243,199,.7)" stroke="#d97706" stroke-width="1.4"/>
+          <text x="275" y="115" text-anchor="middle" fill="#92400e"
+                font-size="10.5" font-weight="700" font-family="system-ui,sans-serif">Sticky Note</text>
+          <text x="275" y="132" text-anchor="middle" fill="#b45309"
+                font-size="9" font-family="system-ui,sans-serif">Kein Cloud-Konto</text>
+          <text x="275" y="148" text-anchor="middle" fill="#b45309"
+                font-size="9" font-family="system-ui,sans-serif">nötig 👍</text>
+          <g opacity=".45">
+            <path d="M390,130 Q405,115 420,130 Q405,145 390,130Z" stroke="#6366f1" stroke-width="1.2" fill="rgba(99,102,241,.07)"/>
+            <path d="M420,130 Q435,115 450,130 Q435,145 420,130Z" stroke="#6366f1" stroke-width="1.2" fill="rgba(99,102,241,.07)"/>
+          </g>
+          <rect x="28" y="256" width="15" height="15" rx="3" fill="#c2410c"/>
+          <rect x="48" y="256" width="15" height="15" rx="3" fill="#16a34a"/>
+          <rect x="68" y="256" width="15" height="15" rx="3" fill="#2563eb"/>
+          <rect x="88" y="256" width="15" height="15" rx="3" fill="#7c3aed"/>
+          <rect x="108" y="256" width="15" height="15" rx="3" fill="#d97706"/>
+          <rect x="128" y="256" width="15" height="15" rx="3" fill="#db2777"/>
+          <circle cx="175" cy="261" r="2" fill="#888"/>
+          <circle cx="190" cy="261" r="3.5" fill="#666"/>
+          <circle cx="207" cy="261" r="5.5" fill="#444"/>
+          <text x="450" y="265" text-anchor="end" fill="#aaa"
+                font-size="9" font-family="system-ui,sans-serif">30 Schritte ↩</text>
+        </svg>
+        <div class="wb-layers">
+          <div class="wb-layer-head">Ebenen</div>
+          <div class="wb-layer-row on">● Zeichnung</div>
+          <div class="wb-layer-row">● Text</div>
+          <div class="wb-layer-row">● Import</div>
+          <div class="wb-layer-row">+ Ebene</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── SCREENSHOT ──────────────────────────────────────────── -->
+<section class="screenshot-strip" aria-labelledby="screenshot-h2">
+  <div class="screenshot-inner">
+    <h2 class="section-title" id="screenshot-h2" style="margin-bottom:28px;">FLOW Board im Einsatz</h2>
+    <img src="img/flowboard-screenshot.jpg" alt="FLOW Board im praktischen Einsatz: Whiteboard-Präsentation auf einem Bildschirm, während parallel auf einem Tablet gezeichnet wird" width="1600" height="1128">
+    <p class="screenshot-caption">Präsentation auf dem großen Bildschirm, Zeichnen live auf dem Tablet — beides gleichzeitig, ohne Cloud.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── FEATURES ───────────────────────────────────────────── -->
+<section id="features" aria-labelledby="feat-h2">
+  <div class="section-wrap pb-0">
+    <div class="eyebrow">Funktionen</div>
+    <h2 class="section-title" id="feat-h2">Alles dabei.<br>Kein Abo nötig.</h2>
+  </div>
+  <div class="section-wrap pt-0">
+    <div class="feat-grid">
+      <div class="feat-cell"><div class="feat-num">01</div><h3>14 Zeichenwerkzeuge</h3><p>Stift, Pinsel, Sprühdose, Text, Formen, Pfeile, Lasso, Füllfarbe, Radierer, Pipette, Laser und Hand — flüssig auf jedem Gerät.</p></div>
+      <div class="feat-cell"><div class="feat-num">02</div><h3>Ebenen-System</h3><p>Unbegrenzte Ebenen: Sichtbarkeit, Sperren, Deckkraft, Duplikation — vertraut aus professionellen Grafikprogrammen.</p></div>
+      <div class="feat-cell"><div class="feat-num">03</div><h3>Video + Audio aufnehmen</h3><p>Session als MP4, WebM oder GIF exportieren — mit Mikrofon für Erklärvideos direkt aus dem Board heraus.</p></div>
+      <div class="feat-cell"><div class="feat-num">04</div><h3>Live-Sharing per QR-Code</h3><p>QR-Code scannen — Schüler oder Kollegen sehen das Board live im Browser. Kein Internet, kein Konto nötig.</p></div>
+      <div class="feat-cell"><div class="feat-num">05</div><h3>Präsentationsmodus</h3><p>Vollbild, Spotlight, Laser-Pointer, Lehrmodus für den zweiten Bildschirm. Fokus auf den Inhalt, nicht die Technik.</p></div>
+      <div class="feat-cell"><div class="feat-num">06</div><h3>Mehrere Seiten</h3><p>Beliebig viele Slides in einem Dokument — arbeitet wie eine Präsentation, fühlt sich an wie ein Notizbuch.</p></div>
+      <div class="feat-cell"><div class="feat-num">07</div><h3>Symmetrie &amp; Neon-Modus</h3><p>2× bis 8×-Spiegelsymmetrie, automatische Form-Erkennung (Strg+K), Neon-Glühen für kreative Einsätze.</p></div>
+      <div class="feat-cell"><div class="feat-num">08</div><h3>Import &amp; Export</h3><p>PNG, JPEG, PDF, SVG importieren. Als PNG, PDF, MP4, WebM oder GIF exportieren — mit Speichern-unter-Dialog.</p></div>
+      <div class="feat-cell"><div class="feat-num">09</div><h3>DSGVO by Design</h3><p>Keine Cloud, kein Tracking, kein Server, kein Account. Alle Daten bleiben auf dem Gerät. Quellcode einsehbar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DEMO ────────────────────────────────────────────────── -->
+<section id="demo" class="demo-strip" aria-labelledby="demo-h2">
+  <div class="demo-inner">
+    <div class="demo-text">
+      <div class="eyebrow">Demo</div>
+      <h2 class="section-title" id="demo-h2">Erst ausprobieren,<br>dann entscheiden.</h2>
+      <p>Die Demo läuft direkt im Browser, kein Download, kein Konto. Alle 14 Werkzeuge frei nutzbar, kein Zeitlimit — Exporte (PNG, PDF, Video, GIF) tragen ein Wasserzeichen.</p>
+      <ul class="check-list">
+        <li><span class="check-mark">✓</span> Alle Werkzeuge freigeschaltet</li>
+        <li><span class="check-mark">✓</span> Kein Download notwendig</li>
+        <li><span class="check-mark">✓</span> Kein Konto, keine E-Mail-Pflicht</li>
+        <li><span class="check-mark">✓</span> Läuft auf jedem Gerät mit Browser</li>
+      </ul>
+      <a href="demo.html" class="btn-primary d-ib">Demo im Browser öffnen →</a>
+    </div>
+    <div class="demo-box">
+      <div class="demo-box-label">Vollversion zusätzlich</div>
+      <ul class="demo-extras">
+        <li><span class="de-mark">✓</span> Exporte ohne Wasserzeichen</li>
+        <li><span class="de-mark">✓</span> Freischaltcode — dauerhaft gespeichert</li>
+        <li><span class="de-mark">✓</span> Handbuch (druckbares PDF) inklusive</li>
+        <li><span class="de-mark">✓</span> 1 Jahr kostenlose Updates</li>
+        <li><span class="de-mark">✓</span> E-Mail-Support direkt vom Entwickler</li>
+        <li><span class="de-mark">✓</span> Sofort-Download nach Zahlung</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── PREIS ───────────────────────────────────────────────── -->
+<section id="kaufen" aria-labelledby="preis-h2">
+  <div class="preis-wrap">
+    <div class="preis-left">
+      <div class="eyebrow">Vollversion</div>
+      <h2 class="section-title" id="preis-h2">Einmal kaufen.<br>Kein Abo.</h2>
+      <p>Andere Whiteboard-Tools kosten 10–25 € pro Nutzer monatlich. FLOW Board: einmal 39 €, dann gehört es dir — ohne laufende Kosten, ohne Preiserhöhungen.</p>
+      <div class="vgl" role="table" aria-label="Preisvergleich">
+        <div class="vgl-row head" role="row">
+          <span role="columnheader">Merkmal</span>
+          <span class="vgl-col" role="columnheader">Abo-Tools</span>
+          <span class="vgl-col head-our" role="columnheader">FLOW Board</span>
+        </div>
+        <div class="vgl-row" role="row">
+          <span role="cell">Kosten pro Jahr</span>
+          <span class="vgl-col vgl-no" role="cell">120–300 €</span>
+          <span class="vgl-col our" role="cell">39 € einmalig</span>
+        </div>
+        <div class="vgl-row" role="row">
+          <span role="cell">Offline nutzbar</span>
+          <span class="vgl-col vgl-no" role="cell">✕</span>
+          <span class="vgl-col our vgl-yes" role="cell">✓</span>
+        </div>
+        <div class="vgl-row" role="row">
+          <span role="cell">Kein Konto nötig</span>
+          <span class="vgl-col vgl-no" role="cell">✕</span>
+          <span class="vgl-col our vgl-yes" role="cell">✓</span>
+        </div>
+        <div class="vgl-row" role="row">
+          <span role="cell">DSGVO-konform</span>
+          <span class="vgl-col vgl-no" role="cell">fraglich</span>
+          <span class="vgl-col our vgl-yes" role="cell">✓</span>
+        </div>
+        <div class="vgl-row" role="row">
+          <span role="cell">Daten lokal</span>
+          <span class="vgl-col vgl-no" role="cell">✕</span>
+          <span class="vgl-col our vgl-yes" role="cell">✓</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="preis-card">
+      <div class="preis-pill">Vollversion</div>
+      <div class="preis-betrag" aria-label="Preis: 39 Euro einmalig">
+        <span class="preis-sym">€</span>
+        <span class="preis-num">39</span>
+      </div>
+      <div class="preis-meta">Einmalkauf · kein Abo · kein Konto</div>
+      <div class="inkl-divider">Im Lieferumfang</div>
+      <ul class="inkl-list">
+        <li><span class="inkl-icon">✓</span> Vollversion (index.html)</li>
+        <li><span class="inkl-icon">✓</span> Handbuch (HANDBUCH.html)</li>
+        <li><span class="inkl-icon">✓</span> Live-Sharing Viewer</li>
+        <li><span class="inkl-icon">✓</span> Lokaler Server (start.bat)</li>
+        <li><span class="inkl-icon">✓</span> 1 Jahr Updates</li>
+        <li><span class="inkl-icon">✓</span> E-Mail-Support</li>
+      </ul>
+      <a href="https://www.checkout-ds24.com/product/PLACEHOLDER" class="btn-kauf"
+         aria-label="FLOW Board Vollversion für 39 Euro kaufen">
+        Jetzt kaufen — 39 €
+      </a>
+      <p class="kauf-info">🔒 Bezahlung über Digistore24 · Sofort-Download per E-Mail<br>14 Tage gesetzliches Widerrufsrecht für Verbraucher</p>
+      <p class="kauf-info mt-5">Gerd Zimmermann GZ-AI.-Stacks · Kleinunternehmer §19 UStG · kein MwSt.-Ausweis</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ────────────────────────────────────────────────── -->
+<section id="faq" class="faq-strip" aria-labelledby="faq-h2">
+  <div class="faq-inner">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="section-title mb-32" id="faq-h2">Häufige Fragen</h2>
+    <details class="faq-item">
+      <summary>Funktioniert FLOW Board ohne Internet?<span class="faq-tog" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Ja, vollständig offline. Einzige Ausnahme: Der PDF-Import lädt die Bibliothek pdf.js einmalig von Mozilla CDN — das ist optional und nur beim ersten PDF-Import nötig.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Auf welchen Geräten läuft FLOW Board?<span class="faq-tog" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Windows, macOS, Linux, iPad, Android — überall wo Chrome, Edge, Firefox oder Safari ab Version 90 verfügbar ist. Empfohlen: Desktop mit Chrome oder Edge für die beste Stift-Erfahrung.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Brauche ich eine Installation?<span class="faq-tog" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Nein. Einfach die HTML-Datei per Doppelklick im Browser öffnen. Für Mikrofon-Aufnahme und Live-Sharing: die mitgelieferte start.bat ausführen — startet einen lokalen Server auf Port 8080.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Was bekomme ich nach dem Kauf?<span class="faq-tog" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Sofort nach der Zahlung erhältst du eine E-Mail von Digistore24 mit Download-Link und Freischaltcode. Der Code wird einmalig in der App eingegeben und ist dann dauerhaft im Browser gespeichert.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Was ist der Unterschied zur Demo?<span class="faq-tog" aria-hidden="true">+</span></summary>
+      <div class="faq-body">Die Demo hat alle 14 Werkzeuge und kein Zeitlimit — einzige Einschränkung: Exporte (PNG, PDF, Video, GIF) tragen ein Wasserzeichen. Der Freischaltcode der Vollversion entfernt das Wasserzeichen und aktiviert den Update-Anspruch. Du kannst die Demo ausgiebig testen, bevor du kaufst.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <strong>GZ-AI. FLOW Board</strong><br>
+      © 2026 Gerd Zimmermann GZ-AI.-Stacks · Görlitzer Straße 10, 91315 Höchstadt a.d. Aisch<br>
+      <a href="mailto:gz.ai.stacks@gmail.com">gz.ai.stacks@gmail.com</a> ·
+      <a href="https://www.gz-ai-stacks.de">www.gz-ai-stacks.de</a>
+    </div>
+    <nav class="footer-links" aria-label="Rechtliche Links">
+      <a href="docs/DSGVO-Erklaerung.html">Datenschutz</a>
+      <a href="docs/Lizenzmodelle.html">Lizenz</a>
+      <a href="mailto:gz.ai.stacks@gmail.com">Kontakt</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var html   = document.documentElement;
+  var dots   = document.querySelectorAll('.ts-dot');
+  var THEMES = ['dark','light','slate','purple','gold'];
+  var stored = localStorage.getItem('fb-lp-theme');
+  var current = (stored && THEMES.indexOf(stored) > -1) ? stored : 'dark';
+
+  html.setAttribute('data-theme', current);
+  _markActive(current);
+
+  dots.forEach(function(dot){
+    dot.addEventListener('click', function(){
+      var t = dot.getAttribute('data-t');
+      html.setAttribute('data-theme', t);
+      localStorage.setItem('fb-lp-theme', t);
+      current = t;
+      _markActive(t);
+    });
+  });
+
+  function _markActive(t){
+    dots.forEach(function(d){
+      d.classList.toggle('active', d.getAttribute('data-t') === t);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
